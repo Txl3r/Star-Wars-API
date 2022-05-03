@@ -58,6 +58,6 @@ class Characters(db.Model):
             "age": self.age,
             "hair-color": self.hair_color,
             "eye-color": self.eye_color,
-            "planet": self.planet_name,
+            "planet": self.planet,
             # do not serialize the password, its a security breach
         }

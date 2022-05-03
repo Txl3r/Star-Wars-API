@@ -45,7 +45,7 @@ def handle_each_person(people_id):
 
     return jsonify(person), 200
 
-@app.rout('/peope', methods=['POST'])
+@app.route('/people', methods=['POST'])
 def create_people():
 
     request_body = connect.get_json()
@@ -53,6 +53,9 @@ def create_people():
     db.session.add(new_people)
     db.session.commit()
     return f"The new people {request_body['email']} was created successfully", 200
+
+@app.route('/people/<int:people_id>', methods=['DELETE'])
+def delete_people():
 
 @app.route('/planets', methods=['GET'])
 def handle_planets():
@@ -69,6 +72,18 @@ def handle_each_planet(planet_id):
     
     return jsonify(planet), 200
 
+@app.route('/planets', methods=['POST'])
+def create_planet():
+
+    request_body = connect.get.json()
+    new_planet = planet(planet_name=request_body['planet_name'], climate=request_body['climate'], gravity=request_body['gravity'], population=request_body['population'])
+    db.session.add(new_planet)
+    db.session.commit()
+    return f"The new planet {request_body['planet_name']} was created successfully", 200
+
+@app.route('/planets/<int.planet_id>', methods=['DELETE'])
+def delete_planet(planet_id):
+
 @app.route('/characters', methods=['GET'])
 def handle_characters():
 
@@ -82,6 +97,20 @@ def handle_each_character(character_id):
     character = Character.query.get(character_id)
 
     return jsonify(character), 200
+
+@app.route('/characters', methods=["POST"])
+def create_characters():
+
+    request_body = connect.get.json()
+    new_character = character(character_name=request_body['character_name'], height=request_body['height'], age=request_body['age'], hair_color=request_body['hair_color'], eye_color=request_body['eye_color'])
+    db.session.add(new_character)
+    db.session.commit()
+    return f"The new character {request_body['character_name']} was created successfully", 200
+
+@app.route('/character/<int:character_id>', methods=['DELETE'])
+def delete_character(character_id):
+
+    db.session.query(Character).filter(Character.character_id==1).delete()
 
 # this only runs if `$ python src/main.py` is executed
 if __name__ == '__main__':
