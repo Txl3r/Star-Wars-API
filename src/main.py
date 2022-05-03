@@ -32,28 +32,39 @@ def sitemap():
 
 
 @app.route('/people', methods=['GET'])
-def handle_hello():
+def handle_person():
 
     people = People.query.all()
     people_list = list(map(lambda x: x.serialize(), people))
+    return jsonify(people_list), 200
 
 @app.route('/people/<int:people_id>', methods=['GET'])
 def handle_each_person(people_id):
 
-    people = People.query.get()
+    people = People.query.get(people_id)
 
     return jsonify(person), 200
+
+@app.rout('/peope', methods=['POST'])
+def create_people():
+
+    request_body = connect.get_json()
+    new_people = people(email=request_body['email'], passowrd=request_body['password'], is_active=request_body['is_active'])
+    db.session.add(new_people)
+    db.session.commit()
+    return f"The new people {request_body['email']} was created successfully", 200
 
 @app.route('/planets', methods=['GET'])
 def handle_planets():
 
-    planet = planet.query.all()
+    planet = Planet.query.all()
     planet_list = list(map(lambda i: i.serialize(), planet))
+    return jsonify(planet_list), 200
 
 @app.route('/planets/<int:planet_id>', methods=['GET'])
 def handle_each_planet(planet_id):
 
-    planet = planet.query.get()
+    planet = Planet.query.get(planet_id)
 
     
     return jsonify(planet), 200
@@ -61,13 +72,14 @@ def handle_each_planet(planet_id):
 @app.route('/characters', methods=['GET'])
 def handle_characters():
 
-    character = character.query.all()
+    character = Character.query.all()
     character_list = list(map(lambda c: c.serialize(), character))
+    return jsonify(character_list), 200
 
 @app.route('/characters/<int:character_id>', methods=['GET'])
-def handle_each_character():
+def handle_each_character(character_id):
 
-    character = character.query.get()
+    character = Character.query.get(character_id)
 
     return jsonify(character), 200
 

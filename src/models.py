@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
 class People(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, unique=True, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(80), unique=False, nullable=False)
     is_active = db.Column(db.Boolean(), unique=False, nullable=True)
@@ -19,11 +19,11 @@ class People(db.Model):
         }
 
 class Planets(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    planet_name = db.Column(db.String(120), unique=True, nullable=False)
-    climate = db.Column(db.Integer(50), unique=True, nullable=False)
-    gravity = db.Column(db.Integer(50), unique=True, nullable=False)
-    population = db.Column(db.Integer(50), unique=True, nullable=False)
+    id = db.Column(db.Integer, unique=True, primary_key=True)
+    planet_name = db.Column(db.String(120))
+    climate = db.Column(db.Integer)
+    gravity = db.Column(db.Integer)
+    population = db.Column(db.Integer)
 
     def __repr__(self):
         return '<Planets %r>' % self.id
@@ -39,13 +39,13 @@ class Planets(db.Model):
         }
 
 class Characters(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    character_name = db.Column(db.String(120), unique=True, nullable=False)
-    height = db.Column(db.Integer(50), unique=True, nullable=False)
-    age = db.Column(db.Integer(50), unique=True, nullable=False)
-    hair_color = db.Column(db.String(60), unique=True, nullable=False)
-    eye_color = db.Column(db.String(60), unique=True, nullable=False)
-    planet = db.Column(db.String(60), unique=True, nullable=False)
+    id = db.Column(db.Integer, unique=True, primary_key=True)
+    character_name = db.Column(db.String(120))
+    height = db.Column(db.Integer)
+    age = db.Column(db.Integer)
+    hair_color = db.Column(db.String(60))
+    eye_color = db.Column(db.String(60))
+    planet = db.Column(db.String(60))
 
     def __repr__(self):
         return '<Characters %r>' % self.id
@@ -56,8 +56,8 @@ class Characters(db.Model):
             "name": self.character_name,
             "height": self.height,
             "age": self.age,
-            "hair color": self.hair_color,
-            "eye color": self.eye_color,
+            "hair-color": self.hair_color,
+            "eye-color": self.eye_color,
             "planet": self.planet_name,
             # do not serialize the password, its a security breach
         }
