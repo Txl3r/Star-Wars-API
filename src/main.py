@@ -67,15 +67,11 @@ def handle_planets():
 
 @app.route('/planets/<int:planet_id>', methods=['GET'])
 def handle_each_planet(planet_id):
-
     planet = Planets.query.get(planet_id)
-
-    
-    return jsonify(planet), 200
+    return planets.serialize(), 200
 
 @app.route('/planets', methods=['POST'])
 def create_planet():
-
     request_body = request.get_json()
     new_planet = Planets(planet_name=request_body['planet_name'], climate=request_body['climate'], gravity=request_body['gravity'], population=request_body['population'])
     db.session.add(new_planet)
