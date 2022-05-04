@@ -56,6 +56,7 @@ def create_people():
 
 @app.route('/people/<int:people_id>', methods=['DELETE'])
 def delete_people():
+    pass
 
 @app.route('/planets', methods=['GET'])
 def handle_planets():
@@ -81,8 +82,9 @@ def create_planet():
     db.session.commit()
     return f"The new planet {request_body['planet_name']} was created successfully", 200
 
-@app.route('/planets/<int.planet_id>', methods=['DELETE'])
+@app.route('/planets/<int:planet_id>', methods=['DELETE'])
 def delete_planet(planet_id):
+    pass
 
 @app.route('/characters', methods=['GET'])
 def handle_characters():
