@@ -21,8 +21,8 @@ class People(db.Model):
 class Planets(db.Model):
     id = db.Column(db.Integer, unique=True, primary_key=True)
     planet_name = db.Column(db.String(120))
-    climate = db.Column(db.Integer)
-    gravity = db.Column(db.Integer)
+    climate = db.Column(db.String(60))
+    gravity = db.Column(db.String(60))
     population = db.Column(db.Integer)
 
     def __repr__(self):
