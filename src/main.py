@@ -56,7 +56,11 @@ def create_people():
 
 @app.route('/people/<int:people_id>', methods=['DELETE'])
 def delete_people():
-    pass
+    people = people.query,get(people_id)
+    if people is None:
+        raise APIException('People not found', status_code=404)
+    db.session.delete(people)
+    db.session.commit()
 
 @app.route('/planets', methods=['GET'])
 def handle_planets():

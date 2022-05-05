@@ -10,9 +10,9 @@ ports:
 tasks:
     - init: |
         cp .env.example .env &&
+        pipenv install &&
         mysql -u root -e "CREATE DATABASE example" &&
-        pipenv run upgrade &&
-        pipenv install;
+        pipenv run upgrade;
       command: >
         pipenv run start;
     - command: python3 welcome.py
