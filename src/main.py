@@ -84,7 +84,12 @@ def create_planet():
 
 @app.route('/planets/<int:planet_id>', methods=['DELETE'])
 def delete_planet(planet_id):
-    pass
+    planets = planets.query.get(planets_id)
+    if planets is None:
+        raise APIException('planets not found', status_code=404)
+        db.session.delete(planets)
+        db.session.commit()
+
 
 @app.route('/characters', methods=['GET'])
 def handle_characters():
@@ -112,7 +117,11 @@ def create_characters():
 @app.route('/character/<int:character_id>', methods=['DELETE'])
 def delete_character(character_id):
 
-    pass
+    character=character.query.get(character_id)
+    if character is None:
+        raise APIException('character not found', status_code=404)
+        db.session.delete(character)
+        db.session.commit()
 # this only runs if `$ python src/main.py` is executed
 if __name__ == '__main__':
     PORT = int(os.environ.get('PORT', 3000))
