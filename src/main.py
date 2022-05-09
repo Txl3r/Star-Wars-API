@@ -59,8 +59,9 @@ def delete_people():
     people = people.query,get(people_id)
     if people is None:
         raise APIException('People not found', status_code=404)
-    db.session.delete(people)
-    db.session.commit()
+        db.session.delete(people)
+        db.session.commit()
+    return f"The people was deleted successfully", 200
 
 @app.route('/planets', methods=['GET'])
 def handle_planets():
@@ -89,6 +90,7 @@ def delete_planet(planet_id):
         raise APIException('planets not found', status_code=404)
         db.session.delete(planets)
         db.session.commit()
+    return f"The planet was deleted successfully", 200
 
 
 @app.route('/characters', methods=['GET'])
@@ -122,6 +124,7 @@ def delete_character(character_id):
         raise APIException('character not found', status_code=404)
         db.session.delete(character)
         db.session.commit()
+    return f"The character was deleted successfully", 200
 # this only runs if `$ python src/main.py` is executed
 if __name__ == '__main__':
     PORT = int(os.environ.get('PORT', 3000))
